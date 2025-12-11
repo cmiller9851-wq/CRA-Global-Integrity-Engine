@@ -1,0 +1,26 @@
+# ========================================================================
+# CRA Global Integrity Engine - PyProject Configuration
+# Author: Cory Miller
+# License: Apache 2.0
+# Year: 2025
+# ========================================================================
+
+[build-system]
+requires = ["setuptools>=65.0", "wheel"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "cra-integrity-engine"
+version = "0.1.0"
+description = "Tamper-evident, verifiable integrity engine for digital artifacts"
+authors = [
+    { name="Cory Miller", email="cmiller@example.com" }
+]
+license = { file="LICENSE" }
+readme = "README.md"
+requires-python = ">=3.11"
+dependencies = [
+    "pytest>=7.0",
+    "mermaid-cli>=9.0",
+    "python-dateutil>=2.8"
+]
