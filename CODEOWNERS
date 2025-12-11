@@ -1,0 +1,16 @@
+# ========================================================================
+# CRA Global Integrity Engine - Code Owners
+# Author: Cory Miller
+# License: Apache 2.0
+# Year: 2025
+# ========================================================================
+
+# Assign Cory Miller as owner for all files
+* @cmiller9851-wq
+
+# Optional: assign specific directories
+/docs/ @cmiller9851-wq
+/src/ @cmiller9851-wq
+/examples/ @cmiller9851-wq
+/tests/ @cmiller9851-wq
+.github/workflows/ @cmiller9851-wq
