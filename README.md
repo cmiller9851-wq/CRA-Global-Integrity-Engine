@@ -13,7 +13,7 @@
 
 ## Overview
 
-The CRA Global Integrity Engine provides **tamper-evident, reproducible, and verifiable artifact management** for research, enterprise, and open-source workflows.  
+The CRA Global Integrity Engine provides **tamper-evident, reproducible, and verifiable artifact management**.  
 It ensures reproducibility, timestamped artifact verification, and automated CI/CD enforcement.
 
 ---
@@ -38,7 +38,7 @@ flowchart TD
     B --> C[Timestamp]
     C --> D[JSON Log File]
     D --> E[Verification]
-    E --> F[Ledger Anchor (Optional)]
+    E --> F[Ledger Anchor Optional]
 
 
 ⸻
@@ -93,6 +93,3 @@ See CONTRIBUTING.md￼ and CODE_OF_CONDUCT.md￼.
 License
 
 Apache 2.0 © Cory Miller 2025
-
----
-
