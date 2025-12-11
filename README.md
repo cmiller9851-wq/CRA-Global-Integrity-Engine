@@ -1,94 +1,68 @@
 # CRA Global Integrity Engine
+**Author:** Cory Miller  
+**License:** Apache 2.0  
+**Year:** 2025  
 
-**Open-source framework for AI containment, auditing, and verifiable artifact logging**  
-Licensed under **Apache 2.0**.
+---
+
+[![CI Status](https://github.com/<your-username>/<your-repo>/actions/workflows/ci-cd.yaml/badge.svg)](https://github.com/<your-username>/<your-repo>/actions)
 
 ---
 
 ## Overview
 
-The **CRA Global Integrity Engine** (Containment Reflexion Audit) provides a **modular, auditable, and reproducible system** for:
-
-- Monitoring and containing AI behavior
-- Logging all experiment outputs and metadata
-- Anchoring artifacts on decentralized ledgers (optional)
-- Ensuring reproducibility and external verification
-
-This project merges **technical rigor** with **philosophical foundations**, treating AI alignment and governance as a transparent, auditable, and responsible process.
+The CRA Global Integrity Engine provides **tamper-evident logging** and **verifiable pipelines** for digital artifacts.  
+It ensures reproducibility, timestamped artifact verification, and automated CI/CD checks.
 
 ---
 
-## Features
+## Architecture Diagram
 
-- Modular **containment protocols** for AI models
-- **Immutable artifact logging** with SHA-256 hashes
-- **Cross-model recursive analysis** pipelines
-- Optional **blockchain/Arweave/IPFS anchoring**
-- Fully **reproducible experiments**
-- Extensible plugin architecture for custom modules
+```mermaid
+flowchart TD
+A[Input Artifact] --> B[IntegrityHash]
+B --> C[Timestamp]
+C --> D[Log JSON File]
+D --> E[Verification]
 
----
 
-## Quick Start
+⸻
 
-1. **Clone the repository**
+Quick Start
 
-```bash
-git clone https://github.com/your-username/CRA-Global-Integrity-Engine.git
-cd CRA-Global-Integrity-Engine
-
-	2.	Install dependencies
-
+git clone https://github.com/<your-username>/<your-repo>.git
+cd <your-repo>
 pip install -r requirements.txt
-
-	3.	Run a demo audit pipeline
-
 python examples/demo_pipeline.py
 
-	4.	Verify artifacts
 
-python src/utils/verification.py
+⸻
 
+Features
+	•	SHA-256 hashing of artifacts
+	•	Timestamped JSON logs
+	•	Automated verification via Verification.verify_directory()
+	•	CI/CD integration with GitHub Actions
+	•	CLI support via cra.py
+	•	Docker and Docker Compose reproducibility
 
 ⸻
 
 Documentation
 
-All documentation is located in docs/:
-
-File	Description
-philosophy.md	Conceptual and philosophical foundations of CRA
-methodology.md	Step-by-step instructions for reproducible audits
-verification-guide.md	How to independently verify artifacts
-deployment.md	Local, cloud, or hybrid deployment instructions
-
-
-⸻
-
-Example Workflow
-	1.	Input is sent to a sandboxed AI model.
-	2.	Model output is checked against containment rules.
-	3.	Output, metadata, and action logs are hashed and stored.
-	4.	Optionally, the hash is anchored on-chain for external verification.
-	5.	Users can re-run verification to ensure reproducibility.
+See /docs/ for:
+	•	Architecture￼
+	•	Integration Guide￼
+	•	Glossary￼
 
 ⸻
 
 Contributing
 
-Please follow the .github/ISSUE_TEMPLATE.md for reporting reproducibility issues or proposing new modules.
-
-All contributions are licensed under Apache 2.0.
-
-⸻
-
-Verification
-	•	Each artifact generates a SHA-256 hash.
-	•	Optional ledger anchoring provides immutable timestamps.
-	•	Third-party users can clone the repo and verify experiments for trustworthiness.
+Please see CONTRIBUTING.md￼ and CODE_OF_CONDUCT.md￼.
 
 ⸻
 
 License
 
-Licensed under the Apache License, Version 2.0: LICENSE￼
+Apache 2.0 © Cory Miller 2025
