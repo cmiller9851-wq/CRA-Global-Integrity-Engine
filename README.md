@@ -6,7 +6,6 @@
 ---
 
 [![CI Status](https://github.com/cmiller9851-wq/CRA-Global-Integrity-Engine/actions/workflows/ci-cd.yaml/badge.svg)](https://github.com/cmiller9851-wq/CRA-Global-Integrity-Engine/actions)
-[![Release](https://img.shields.io/github/v/release/cmiller9851-wq/CRA-Global-Integrity-Engine)](https://github.com/cmiller9851-wq/CRA-Global-Integrity-Engine/releases)
 [![License](https://img.shields.io/github/license/cmiller9851-wq/CRA-Global-Integrity-Engine)](LICENSE)
 
 ---
