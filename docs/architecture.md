@@ -1,12 +1,3 @@
-    Great — we’ll do this one file at a time.
-Here’s Step 1 for the docs/ folder.
-
-Step 1 — Create docs/architecture.md
-
-File path: docs/architecture.md
-
-Copy-paste content:
-
 # CRA Global Integrity Engine  
 ## System Architecture Documentation  
 **Author:** Cory Miller  
