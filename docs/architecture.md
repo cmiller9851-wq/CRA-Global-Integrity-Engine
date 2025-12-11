@@ -1,3 +1,12 @@
+    Great — we’ll do this one file at a time.
+Here’s Step 1 for the docs/ folder.
+
+Step 1 — Create docs/architecture.md
+
+File path: docs/architecture.md
+
+Copy-paste content:
+
 # CRA Global Integrity Engine  
 ## System Architecture Documentation  
 **Author:** Cory Miller  
@@ -34,3 +43,68 @@ Each module exposes a stable, dependency-light API.
 ### Key Function  
 ```python
 IntegrityHash.compute_hash(content: str) -> str
+
+
+⸻
+
+Layer 2: Verification
+
+Location: src/utils/verification.py
+Responsibility: Validate that artifacts have not been tampered with.
+
+Design Goals
+	•	Deterministic behavior
+	•	Directory-wide scanning
+	•	JSON log support
+
+Key Function
+
+Verification.verify_directory(path: str) -> Dict[str, bool]
+
+
+⸻
+
+Layer 3: Timestamp Layer
+
+Location: src/integrity/timestamp.py
+Responsibility: Generate ISO-8601 timestamps with millisecond precision.
+
+Design Goals
+	•	Human readable
+	•	Machine sortable
+	•	Cross-language compatible
+
+Key Function
+
+Timestamp.now() -> str
+
+
+⸻
+
+Data Flow Diagram (Mermaid)
+
+flowchart TD
+
+A[Input Artifact] --> B[IntegrityHash]
+B --> C[Timestamp]
+C --> D[Log JSON File]
+D --> E[Verification]
+
+
+⸻
+
+Summary
+
+This architecture provides:
+	•	End-to-end integrity
+	•	Full reproducibility
+	•	Minimal cognitive overhead
+	•	High portability
+
+It is intentionally simple, so it can be adopted broadly and audited easily.
+
+**Suggested git commands (iPhone-friendly):**
+```bash
+git add docs/architecture.md
+git commit -m "Add architecture documentation for CRA Global Integrity Engine"
+git push
