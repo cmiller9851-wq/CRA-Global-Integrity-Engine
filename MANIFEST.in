@@ -1,0 +1,17 @@
+# ========================================================================
+# CRA Global Integrity Engine - Package Manifest
+# Author: Cory Miller
+# License: Apache 2.0
+# Year: 2025
+# ========================================================================
+
+include README.md
+include CHANGELOG.md
+include LICENSE
+include SECURITY.md
+include CONTRIBUTING.md
+include CODE_OF_CONDUCT.md
+include QUICKSTART.md
+include docs/*
+include examples/*
+include assets/*
