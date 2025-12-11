@@ -1,0 +1,42 @@
+name: CRA Integrity CI/CD
+
+on:
+  push:
+    branches: [ "main" ]
+  pull_request:
+    branches: [ "main" ]
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+    - name: Checkout repository
+      uses: actions/checkout@v4
+
+    - name: Set up Python
+      uses: actions/setup-python@v5
+      with:
+        python-version: '3.11'
+
+    - name: Install dependencies
+      run: |
+        pip install -r requirements.txt
+
+    - name: Run demo pipeline
+      run: |
+        python examples/demo_pipeline.py
+
+    - name: Verify artifact logs
+      run: |
+        python - << 'EOF'
+from src.utils.verification import Verification
+results = Verification.verify_directory("logs")
+invalid = [file for file, ok in results.items() if not ok]
+print("Verification results:", results)
+if invalid:
+    raise Exception(f"Invalid artifacts detected: {invalid}")
+EOF
+
+    - name: Success message
+      run: echo "CRA Integrity Check Completed Successfully 🎉"
