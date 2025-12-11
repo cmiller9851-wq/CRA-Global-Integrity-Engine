@@ -1,3 +1,5 @@
+
+
 # CRA Global Integrity Engine
 **Author:** Cory Miller  
 **License:** Apache 2.0  
@@ -6,6 +8,7 @@
 ---
 
 [![CI Status](https://github.com/cmiller9851-wq/CRA-Global-Integrity-Engine/actions/workflows/ci-cd.yaml/badge.svg)](https://github.com/cmiller9851-wq/CRA-Global-Integrity-Engine/actions)
+[![Release](https://img.shields.io/github/v/release/cmiller9851-wq/CRA-Global-Integrity-Engine)](https://github.com/cmiller9851-wq/CRA-Global-Integrity-Engine/releases)
 [![License](https://img.shields.io/github/license/cmiller9851-wq/CRA-Global-Integrity-Engine)](LICENSE)
 
 ---
@@ -44,17 +47,10 @@ flowchart TD
 
 Quick Start
 
-# Clone repository
 git clone https://github.com/cmiller9851-wq/CRA-Global-Integrity-Engine.git
 cd CRA-Global-Integrity-Engine
-
-# Install dependencies
 pip install -r requirements.txt
-
-# Run demo pipeline
 python examples/demo_pipeline.py
-
-# Verify logs
 python - << 'EOF'
 from src.utils.verification import Verification
 print(Verification.verify_directory("logs"))
@@ -92,5 +88,7 @@ See CONTRIBUTING.md￼ and CODE_OF_CONDUCT.md￼.
 License
 
 Apache 2.0 © Cory Miller 2025
+
+
 
 
