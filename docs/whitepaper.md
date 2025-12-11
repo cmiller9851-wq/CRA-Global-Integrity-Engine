@@ -1,4 +1,4 @@
-Perfect — the next step is to create a whitepaper / long-form adoption guide in /docs/whitepaper.md. This makes the # CRA Global Integrity Engine — Whitepaper
+# CRA Global Integrity Engine — Whitepaper
 **Author:** Cory Miller  
 **License:** Apache 2.0  
 **Year:** 2025  
