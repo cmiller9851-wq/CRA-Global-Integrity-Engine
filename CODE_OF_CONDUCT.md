@@ -50,6 +50,3 @@ This Code of Conduct is adapted from the [Contributor Covenant, version 2.1](htt
 ## Scope
 
 This Code of Conduct applies both within project spaces and in public spaces when an individual is representing the project or its community.
-git add CODE_OF_CONDUCT.md
-git commit -m "Add CODE_OF_CONDUCT.md to define professional standards and community expectations"
-git push
