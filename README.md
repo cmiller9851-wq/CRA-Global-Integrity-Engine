@@ -1,5 +1,3 @@
-
-
 # CRA Global Integrity Engine
 **Author:** Cory Miller  
 **License:** Apache 2.0  
@@ -32,21 +30,9 @@ Optional integration: external ledger anchoring via blockchain or Arweave.
 
 ---
 
-## Workflow Diagram
+## Quick Start
 
-```mermaid
-flowchart TD
-    A[Input Artifact] --> B[IntegrityHash]
-    B --> C[Timestamp]
-    C --> D[JSON Log File]
-    D --> E[Verification]
-    E --> F[Ledger Anchor Optional]
-
-
-⸻
-
-Quick Start
-
+```bash
 git clone https://github.com/cmiller9851-wq/CRA-Global-Integrity-Engine.git
 cd CRA-Global-Integrity-Engine
 pip install -r requirements.txt
@@ -55,10 +41,6 @@ python - << 'EOF'
 from src.utils.verification import Verification
 print(Verification.verify_directory("logs"))
 EOF
-
-
-⸻
-
 Features
 	•	SHA-256 hashing of artifacts
 	•	ISO-8601 timestamped JSON logs
@@ -88,7 +70,3 @@ See CONTRIBUTING.md￼ and CODE_OF_CONDUCT.md￼.
 License
 
 Apache 2.0 © Cory Miller 2025
-
-
-
-
