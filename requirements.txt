@@ -1,0 +1,11 @@
+# CRA Global Integrity Engine - Dependencies
+# Copyright 2025 Cory Miller
+# Licensed under the Apache License, Version 2.0
+
+# Core utilities
+hashlib
+datetime
+
+# Optional for Jupyter examples
+jupyter
+ipykernel
