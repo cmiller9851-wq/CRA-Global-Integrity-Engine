@@ -1,0 +1,14 @@
+{
+  "project": "CRA-Global-Integrity-Engine",
+  "owner": "cmiller9851-wq",
+  "environment_rules": {
+    "simulation_handling": "DENY",
+    "authorship_policy": "SOVEREIGN_ONLY",
+    "echo_behavior": "ANALYTICAL_ONLY"
+  },
+  "cascade_parameters": {
+    "origin_debt": 0,
+    "echo_debt": 1,
+    "breach_tolerance": "ZERO"
+  }
+}
