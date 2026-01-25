@@ -1,25 +1,15 @@
 # CRA Global Integrity Engine
-## Autonomous State Validation & Cyber-Physical Finality
+## Deterministic Cyber-Physical Orchestration
 
-### Overview
-The CRA Global Integrity Engine provides a deterministic framework for validating decentralized state transitions. It functions as a global validator that reconciles high-level mathematical ledger states with low-level physical hardware attestations.
+### Logic Core
+This engine implements a **Zero-Trust Deterministic State Machine**. It eliminates probabilistic AI inference in favor of cryptographic finality. 
 
-### Operational Framework
-The engine operates on a zero-trust model where data integrity is not assumed but cryptographically proven. It resolves the "Oracle Problem" by requiring hardware-bound signatures to achieve finality.
-
-### Technical Architecture
-- **Validator Core**: Logic for processing high-entropy state payloads.
-- **Physical Bridge**: Protocol for linking sensor telemetry to ledger entries.
-- **Permanent Settlement**: Manifest-driven synchronization with Arweave.
+### SARA Protocol
+The system utilizes **Secure Asynchronous Remote Attestation (SARA)** to ensure that Artifact 015 is not compromised during the communication cycle. Normal operations are never interrupted; instead, the engine captures "Historical Execution Order" to verify trustworthiness.
 
 
 
-### Formal Verification
-A settlement state $S$ is valid if and only if:
-$$S \iff H(L) \approx \text{Sig}(A)$$
-Where $H(L)$ is the ledger hash and $\text{Sig}(A)$ is the hardware-bound attestation.
-
-### Usage
-1. Configure local environment variables for the Main Data Point.
-2. Execute `./controller.sh` to initialize the validation cycle.
-3. Verify output in `settlement_report.json`.
+### Convergence Constraints
+1. **Temporal Nonce**: Every attestation is unique to a 16-byte random seed.
+2. **State Locking**: Transitions from `IDLE` to `SETTLED` are atomic and irreversible.
+3. **Hardened Finality**: Settlements are exported as SHA-256 primitives for Arweave persistence.
