@@ -1,83 +1,25 @@
-# CRA Global Integrity Engine  
+# CRA Global Integrity Engine
+## Autonomous State Validation & Cyber-Physical Finality
 
-## Overview  
-The CRA Global Integrity Engine is a Python‑based tool that automates risk assessment for software projects. It evaluates code quality, dependency health, and security findings, then presents a consolidated risk score. Designed for seamless integration with CI/CD pipelines, it also provides a lightweight web dashboard for visualizing risk trends.
+### Overview
+The CRA Global Integrity Engine provides a deterministic framework for validating decentralized state transitions. It functions as a global validator that reconciles high-level mathematical ledger states with low-level physical hardware attestations.
 
-## Key Features  
-- **Automated risk scoring** – combines static analysis, dependency checks, and vulnerability data.  
-- **CI/CD ready** – supports GitHub Actions, Jenkins, GitLab CI, etc.  
-- **Dashboard** – interactive charts (Chart.js) show risk evolution over time.  
-- **Extensible plugins** – add custom checks (licensing, compliance, etc.) via a simple Python interface.  
-- **Flexible storage** – default SQLite; switch to PostgreSQL for larger teams.
+### Operational Framework
+The engine operates on a zero-trust model where data integrity is not assumed but cryptographically proven. It resolves the "Oracle Problem" by requiring hardware-bound signatures to achieve finality.
 
-## Quick Start  
+### Technical Architecture
+- **Validator Core**: Logic for processing high-entropy state payloads.
+- **Physical Bridge**: Protocol for linking sensor telemetry to ledger entries.
+- **Permanent Settlement**: Manifest-driven synchronization with Arweave.
 
-```bash
-# Clone the repository
-git clone https://github.com/cmiller9851-wq/CRA-Global-Integrity-Engine.git
-cd CRA-Global-Integrity-Engine
 
-# Install dependencies
-pip install -r requirements.txt
 
-# Configure (copy example and add a GitHub token)
-cp .env.example .env
-# edit .env → set GITHUB_TOKEN=your_token_here
+### Formal Verification
+A settlement state $S$ is valid if and only if:
+$$S \iff H(L) \approx \text{Sig}(A)$$
+Where $H(L)$ is the ledger hash and $\text{Sig}(A)$ is the hardware-bound attestation.
 
-# Run the engine against a repository
-python run_engine.py --repo https://github.com/yourorg/yourproject
-```
-
-The engine generates a risk report and starts the dashboard at `http://localhost:5000`.
-
-## CI Integration Example (GitHub Actions)
-
-```yaml
-name: Integrity Check
-on: [push, pull_request]
-
-jobs:
-  integrity:
-    runs-on: ubuntu-latest
-    steps:
-      - uses: actions/checkout@v3
-      - name: Set up Python
-        uses: actions/setup-python@v4
-        with:
-          python-version: '3.11'
-      - name: Install dependencies
-        run: pip install -r requirements.txt
-      - name: Run CRA Engine
-        env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-        run: python run_engine.py --repo ${{ github.repositoryUrl }}
-```
-
-## Adding a Custom Plugin  
-
-Create `plugins/my_check.py`:
-
-```python
-def run_check(repo_path):
-    # custom logic here
-    return {
-        "name": "My Check",
-        "status": "pass",
-        "details": "All checks passed."
-    }
-```
-
-The engine automatically discovers and runs plugins placed in the `plugins/` directory.
-
-## Contributing  
-
-1. Fork the repo.  
-2. Create a feature branch (`git checkout -b feature-name`).  
-3. Implement changes, add tests, and update documentation.  
-4. Submit a Pull Request describing the contribution.
-
-Please follow the existing code style and include appropriate test coverage.
-
-## License  
-
-This project is licensed under the **Apache License 2.0**.
+### Usage
+1. Configure local environment variables for the Main Data Point.
+2. Execute `./controller.sh` to initialize the validation cycle.
+3. Verify output in `settlement_report.json`.
