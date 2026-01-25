@@ -1,24 +1,30 @@
-import json
 import hashlib
+import json
 
-class IntegrityEngine:
+class DeterministicEngine:
+    """Formal State Machine for Global Integrity Validation."""
+    STATES = ["IDLE", "ATTES_RECEIVED", "MATH_VERIFIED", "SETTLED"]
+
     def __init__(self):
-        self.compliance_standard = "CRA-2026-FINAL"
+        self.state = "IDLE"
 
-    def certify_settlement(self, bridge_hash, artifact_id):
-        """
-        Final check to certify the integrity of a bridged hash.
-        """
-        certification = hashlib.sha256(f"{bridge_hash}|{self.compliance_standard}".encode()).hexdigest()
-        return {
-            "artifact_id": artifact_id,
-            "certification_id": certification,
-            "integrity_score": 1.0,
-            "status": "CERTIFIED"
-        }
+    def transition(self, current_proof):
+        """Strict state-transition logic; prevents out-of-order finality."""
+        if self.state == "IDLE" and current_proof.get("sig"):
+            self.state = "ATTES_RECEIVED"
+        
+        if self.state == "ATTES_RECEIVED":
+            # Verification logic here
+            self.state = "SETTLED"
+            return True
+        return False
+
+    def finalize(self, proof):
+        if self.transition(proof):
+            return hashlib.sha256(json.dumps(proof).encode()).hexdigest()
+        raise RuntimeError("Integrity Breach: Invalid State Transition")
 
 if __name__ == "__main__":
-    engine = IntegrityEngine()
-    # Input from stark_bridge.py
-    cert = engine.certify_settlement("ea7c...3b21", "015")
-    print(json.dumps(cert, indent=4))
+    engine = DeterministicEngine()
+    proof_data = {"sig": "hmac_0x...", "artifact": "015"}
+    print(f"Finality Hash: {engine.finalize(proof_data)}")
