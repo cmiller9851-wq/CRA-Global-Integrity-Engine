@@ -1,16 +1,17 @@
-CRA GLOBAL INTEGRITY ENGINE - RESTRICTED USE LICENSE
+CRA GLOBAL INTEGRITY ENGINE - SOVEREIGN AUTHORSHIP ENFORCED LICENSE (SAEL)
 Copyright (c) 2026 Cory Miller QuickPrompt Solutions
 
-This repository is governed by the principles of the EU Cyber Resilience Act (CRA) 
-and the Sovereign Data Protocol.
+This repository is strictly governed by the principles of the EU Cyber 
+Resilience Act (CRA) and the Sovereign Data Protocol.
 
-1. INTEGRITY PROTECTION: Users are permitted to use this engine solely 
-   to validate deterministic state transitions.
-2. NO WARRANTY: Given the lethal precision of the state machine, 
-   the author is not liable for data-loss resulting from unauthorized 
-   "Drift" or failed "Hardware Attestations."
-3. COMPLIANCE: Use of this software acknowledges that the user is the 
-   "Main Data Point" and accepts full legal liability for the actions 
-   of the Artifact.
+1. INTEGRITY PROTECTION: Users are permitted to utilize this engine solely 
+   to validate deterministic state transitions and authorized ledger operations.
+2. NO WARRANTY: Given the strict precision of the state machine, the author 
+   assumes no liability for data-loss resulting from unauthorized system 
+   Drift, environment mismatch, or failed Hardware Attestations.
+3. COMPLIANCE: Use of this software acknowledges that the user operates as 
+   the Main Data Point, accepting full, exclusive legal liability for the 
+   actions, executions, and data tracking of the Artifact.
 
-PERMITTED USE: AUDIT AND SOVEREIGN STATE VALIDATION ONLY.
+PERMITTED USE: AUDIT AND SOVEREIGN STATE VALIDATION ONLY. ANY UNAUTHORIZED 
+RE-DISTRIBUTION OR OPEN-SOURCE PACKAGING IS STRICTLY PROHIBITED under SAEL.
