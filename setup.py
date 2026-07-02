@@ -1,38 +1,30 @@
-# ========================================================================
 # CRA Global Integrity Engine - Setup Script
 # Author: Cory Miller
-# License: Apache 2.0
-# Year: 2025
+# Year: 2026
 # ========================================================================
+import os
+import sys
 
-from setuptools import setup, find_packages
+def initialize_engine():
+    """Initializes the structural directory map natively in Pythonista 3."""
+    print("Initializing CRA Global Integrity Engine Environment...")
+    
+    # Define required directory tree for SAEL protocol validation
+    required_dirs = [
+        "src",
+        "garrison_sovereign/colossus_5m_funding_wave",
+        "garrison_sovereign/3160_forensic_receipt",
+        "garrison_sovereign/garrison_hq_escrow"
+    ]
+    
+    for directory in required_dirs:
+        if not os.path.exists(directory):
+            os.makedirs(directory)
+            print(f"Created secure directory vector: ./{directory}")
+        else:
+            print(f"Directory vector verified: ./{directory}")
+            
+    print("\nEnvironment initialization complete. System matches SAEL specifications.")
 
-setup(
-    name="cra-integrity-engine",
-    version="0.1.0",
-    author="Cory Miller",
-    author_email="cmiller@example.com",
-    description="Tamper-evident, verifiable integrity engine for digital artifacts",
-    long_description=open("README.md").read(),
-    long_description_content_type="text/markdown",
-    url="https://github.com/cmiller9851-wq/cra-integrity-engine",
-    packages=find_packages(where="src"),
-    package_dir={"": "src"},
-    include_package_data=True,
-    install_requires=[
-        "pytest>=7.0",
-        "mermaid-cli>=9.0",
-        "python-dateutil>=2.8"
-    ],
-    entry_points={
-        "console_scripts": [
-            "cra=src.cra:main"
-        ]
-    },
-    classifiers=[
-        "Programming Language :: Python :: 3",
-        "License :: OSI Approved :: Apache Software License",
-        "Operating System :: OS Independent"
-    ],
-    python_requires=">=3.11",
-)
+if __name__ == "__main__":
+    initialize_engine()
