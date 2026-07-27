@@ -1,0 +1,156 @@
+import sys
+import os
+import inspect
+import builtins
+import hashlib
+from pathlib import Path
+from typing import List, Dict, Any, Set
+
+
+class UniversalEnvironmentAuditor:
+    """Portable runtime security auditor for Python standard environments."""
+
+    # Core built-ins expected in a clean CPython / embedded runtime
+    EXPECTED_BUILTINS: Set[str] = {
+        'abs', 'all', 'any', 'ascii', 'bin', 'bool', 'breakpoint', 'bytearray',
+        'bytes', 'callable', 'chr', 'classmethod', 'compile', 'complex',
+        'delattr', 'dict', 'dir', 'divmod', 'enumerate', 'eval', 'exec',
+        'filter', 'float', 'format', 'frozenset', 'getattr', 'globals',
+        'hasattr', 'hash', 'help', 'hex', 'id', 'input', 'int', 'isinstance',
+        'issubclass', 'iter', 'len', 'list', 'locals', 'map', 'max',
+        'memoryview', 'min', 'next', 'object', 'oct', 'open', 'ord', 'pow',
+        'print', 'property', 'range', 'repr', 'reversed', 'round', 'set',
+        'setattr', 'slice', 'sorted', 'staticmethod', 'str', 'sum', 'super',
+        'tuple', 'type', 'vars', 'zip', '__import__'
+    }
+
+    # Static signatures associated with high-risk or dynamic execution vectors
+    SUSPICIOUS_PATTERNS: Dict[str, str] = {
+        "subprocess": "Process creation / OS command execution",
+        "ctypes": "Low-level memory access or foreign function calls",
+        "os.system": "Direct shell command execution",
+        "socket": "Raw networking or socket creation",
+        "__subclasses__": "Class hierarchy reflection / sandbox escape attempt",
+        "__globals__": "Global namespace introspection / environment access",
+        "base64.b64decode": "Obfuscated payload decoding",
+        "marshal.loads": "Serialized bytecode execution"
+    }
+
+    def __init__(self, target_directory: str = None):
+        # Resolve target directory relative to host execution context
+        if target_directory:
+            self.target_dir = Path(target_directory).resolve()
+        else:
+            self.target_dir = Path(__file__).resolve().parent
+
+        self.findings: List[Dict[str, Any]] = []
+
+    def audit_builtins(self) -> None:
+        """Verifies that core built-in functions have not been overridden or hooked."""
+        for builtin_name in self.EXPECTED_BUILTINS:
+            if not hasattr(builtins, builtin_name):
+                self.findings.append({
+                    "category": "BUILTIN_MISSING",
+                    "severity": "HIGH",
+                    "target": builtin_name,
+                    "details": "Expected core built-in attribute is absent from builtins."
+                })
+                continue
+
+            obj = getattr(builtins, builtin_name)
+            # Valid CPython built-ins must be built-in functions, methods, or types
+            if not inspect.isbuiltin(obj) and not isinstance(obj, type):
+                self.findings.append({
+                    "category": "BUILTIN_OVERRIDDEN",
+                    "severity": "CRITICAL",
+                    "target": builtin_name,
+                    "details": f"Built-in '{builtin_name}' replaced by custom object: {type(obj)}"
+                })
+
+    def audit_loaded_modules(self) -> None:
+        """Inspects in-memory loaded modules in sys.modules for tampering."""
+        for mod_name, mod_obj in list(sys.modules.items()):
+            if mod_obj is None:
+                self.findings.append({
+                    "category": "MODULE_NULLIFIED",
+                    "severity": "MEDIUM",
+                    "target": mod_name,
+                    "details": "Module reference in sys.modules set to None (blocked or intercepted)."
+                })
+            elif hasattr(mod_obj, "__file__") and mod_obj.__file__:
+                file_path = str(mod_obj.__file__)
+                # Identify non-standard modules loaded outside system libraries
+                if not any(lib_path in file_path for lib_path in ["site-packages", "Frameworks", "lib/python"]):
+                    self.findings.append({
+                        "category": "LOCAL_MODULE_ACTIVE",
+                        "severity": "LOW",
+                        "target": mod_name,
+                        "details": f"Active module loaded from local filesystem: {file_path}"
+                    })
+
+    def audit_filesystem(self) -> None:
+        """Scans local Python scripts for high-risk or suspicious code signatures."""
+        if not self.target_dir.exists():
+            return
+
+        current_script = Path(__file__).resolve()
+
+        for root, _, files in os.walk(self.target_dir):
+            for file in files:
+                if file.endswith(".py"):
+                    file_path = Path(root) / file
+                    if file_path == current_script:
+                        continue
+
+                    try:
+                        content = file_path.read_text(encoding="utf-8", errors="ignore")
+                        for pattern, description in self.SUSPICIOUS_PATTERNS.items():
+                            if pattern in content:
+                                rel_path = file_path.relative_to(self.target_dir)
+                                self.findings.append({
+                                    "category": "SUSPICIOUS_PATTERN",
+                                    "severity": "WARNING",
+                                    "target": str(rel_path),
+                                    "details": f"Detected pattern '{pattern}': {description}"
+                                })
+                    except Exception as err:
+                        self.findings.append({
+                            "category": "FILE_READ_ERROR",
+                            "severity": "LOW",
+                            "target": str(file_path),
+                            "details": str(err)
+                        })
+
+    def run_audit(self) -> Dict[str, Any]:
+        """Executes all integrity checks and returns a summary report."""
+        self.audit_builtins()
+        self.audit_loaded_modules()
+        self.audit_filesystem()
+
+        critical_count = sum(1 for f in self.findings if f["severity"] in ["CRITICAL", "HIGH"])
+
+        return {
+            "status": "COMPROMISED" if critical_count > 0 else "CLEAN",
+            "target_directory": str(self.target_dir),
+            "total_findings": len(self.findings),
+            "critical_issues": critical_count,
+            "findings": self.findings
+        }
+
+
+if __name__ == "__main__":
+    auditor = UniversalEnvironmentAuditor()
+    report = auditor.run_audit()
+
+    print("=========================================================")
+    print("         ENVIRONMENT INTEGRITY AUDIT REPORT              ")
+    print("=========================================================")
+    print(f" Status           : {report['status']}")
+    print(f" Target Directory : {report['target_directory']}")
+    print(f" Total Findings   : {report['total_findings']}")
+    print(f" Critical Issues  : {report['critical_issues']}")
+    print("=========================================================\n")
+
+    for finding in report["findings"]:
+        print(f"[{finding['severity']}] {finding['category']} -> {finding['target']}")
+        print(f"  Details: {finding['details']}\n")
