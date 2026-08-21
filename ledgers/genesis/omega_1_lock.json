@@ -1,0 +1,10 @@
+{
+  "protocol": "CRA_v1.0.0",
+  "audit_id": "AUDIT_00001",
+  "engine": "OMEGA_1_SOVEREIGN_ENGINE",
+  "status": "ENFORCED",
+  "drift_measured": "0.000000%",
+  "root_proof": "9e0b0baf56e50e2cc628074453c31c1df479b63513973bbe12934f454e5f4f31",
+  "timestamp": "2026-08-21T22:57:36.691036+00:00",
+  "signature": "shRYpuXBXDHuYptZHb1sHQXe7d4+7HaT02aLlBO6pwrfgOs454x80CCvUwoM8KdphbgnsgcDcMM8zUTmbxvURpMLyv4vebUr5KuE2R6njmrnnKryisbo2Adb3RKfQrNt6ZTHLZIbQdZozkx24NUnDuPMYDp6PMY3L7PM876y7rOi670iPZ3IyPG3J8nlRfB0HGGZgPmOpJSeMgwRSD9h0zlVQingLvejxwxlAxU+TX6zWc7dftfbCCg51tnUcV8Gq+9gemhS+zly2zr1Cb+MQZSuaEVmopImzs5+oPwDaNLf7Ux5BVOcC0s2kbQ78DFXzfaoQpzKGmRJ99CE6LYASQ=="
+}
